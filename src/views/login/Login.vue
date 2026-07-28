@@ -33,6 +33,13 @@
             登录
           </el-button>
         </el-form-item>
+        
+        <el-form-item>
+          <el-button @click="goToRegister">
+              注册账号
+          </el-button>
+        </el-form-item>
+
 
       </el-form>
     </el-card>
@@ -75,8 +82,12 @@ const handleLogin = async () => {
 
   }
 }
+// 跳转到注册页面
+const goToRegister = () => {
 
+    router.push('/register')
 
+}
  
 
 </script>

@@ -12,18 +12,20 @@
 
       <div>
 
-        欢迎：
-
-        {{ user.username }}
+          <el-button
+          type="primary"
+          size="small"
+          @click="goToUserInfo"
+        >
+            个人中心
+        </el-button>
 
         <el-button
             type="danger"
             size="small"
             @click="logout"
         >
-
-          退出登录
-
+            退出登录
         </el-button>
 
       </div>
@@ -44,21 +46,27 @@
 
           </el-menu-item>
 
-          <el-menu-item index="2">
-
-            简历管理
-
+          <el-menu-item
+              index="2"
+              @click="goToResume"
+          >
+              简历管理
           </el-menu-item>
 
-          <el-menu-item index="3">
-
+          <el-menu-item 
+              index="3"
+              @click="goToJob"
+          >
             岗位管理
 
           </el-menu-item>
 
-          <el-menu-item index="4">
+          <el-menu-item 
+              index="4"
+              @click="goToApplication"
+          >
 
-            AI 面试
+            收到的简历
 
           </el-menu-item>
 
@@ -130,6 +138,28 @@ onMounted(()=>{
 
 })
 
+const goToResume = () => {
+
+    router.push('/resume')
+
+}
+const goToJob = () => {
+
+    router.push('/job')
+
+}
+const goToApplication = () => {
+
+    router.push('/application')
+
+}
+const goToUserInfo = () => {
+    router.push('/user/info')
+}
+
+const goToPassword = () => {
+    router.push('/user/password')
+}
 </script>
 
 <style scoped>
