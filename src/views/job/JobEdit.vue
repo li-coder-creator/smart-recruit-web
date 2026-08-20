@@ -163,7 +163,7 @@ const handleSave = async () => {
 
             ElMessage.success('保存成功')
 
-            router.push('/job')
+            router.push('/layout/job')
 
         }
 
@@ -223,7 +223,7 @@ const loadJobDetail = async () => {
 }
 
 const goBack = () => {
-    router.push('/job')
+    router.push('/layout/job')
 }
 // 页面加载完成后执行
 onMounted(() => {

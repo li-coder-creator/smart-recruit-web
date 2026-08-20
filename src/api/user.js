@@ -5,9 +5,14 @@ export const login = (data) => {
     return request.post('/user/login', data)
 }
 
-// 注册
+// 注册求职者
 export const register = (data) => {
     return request.post('/user/register', data)
+}
+
+// 注册企业用户
+export const companyRegister = (data) => {
+    return request.post('/company/register', data)
 }
 
 // 获取用户信息

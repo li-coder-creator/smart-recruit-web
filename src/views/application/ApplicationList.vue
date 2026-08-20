@@ -2,7 +2,7 @@
 
   <div class="application-container">
 
-    <h2>收到的简历</h2>
+   <h2>{{ pageTitle }}</h2>
 
     <!-- 投递列表 -->
     <div class="application-list">
@@ -14,34 +14,30 @@
       >
 
         <h3>
-          投递编号：{{ application.id }}
+        {{ application.jobTitle }}
         </h3>
 
-        <p>
-          求职者ID：
-          {{ application.userId }}
+        <p v-if="userStore.role === 'COMPANY'">
+          求职者：{{ application.username }}
         </p>
 
         <p>
-          岗位ID：
-          {{ application.jobId }}
+          公司：{{ application.companyName }}
         </p>
 
         <p>
-          简历ID：
-          {{ application.resumeId }}
+          简历：{{ application.resumeTitle }}
         </p>
 
         <p>
-          投递状态：
-          {{ getStatusText(application.status) }}
+          投递状态：{{ application.statusText }}
         </p>
 
         <p>
-          投递时间：
-          {{ application.createTime }}
+          投递时间：{{ application.createTime }}
         </p>
 
+       
         <el-button
             type="primary"
             @click="goToApplicationDetail(application.id)"
@@ -60,12 +56,20 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue'
-
+import { ref, computed, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 
-import { getApplicationList } from '@/api/application'
+import {  getApplicationList,getJobseekerApplication  } from '@/api/application'
+const userStore = useUserStore()
 
+const isCompany = computed(() => {
+    return userStore.role === 'COMPANY'
+})
+
+const pageTitle = computed(() => {
+    return isCompany.value ? '收到的简历' : '我的投递'
+})
 
 const router = useRouter()
 
@@ -79,7 +83,23 @@ const loadApplicationList = async () => {
 
     try {
 
-        const res = await getApplicationList()
+        let res
+
+        if (userStore.role === 'JOB_SEEKER') {
+
+            // 求职者：查询我的投递
+            res = await getJobseekerApplication()
+
+        } else if (userStore.role === 'COMPANY') {
+
+            // 企业：查询收到的投递
+            res = await getApplicationList()
+
+        } else {
+
+            return
+
+        }
 
         if (res.data.code === 200) {
 
@@ -96,32 +116,10 @@ const loadApplicationList = async () => {
 }
 
 
-// 状态文字转换
-const getStatusText = (status) => {
-
-    const statusMap = {
-
-        0: '待处理',
-
-        1: '已查看',
-
-        2: '面试',
-
-        3: '录用',
-
-        4: '拒绝'
-
-    }
-
-    return statusMap[status] || '未知状态'
-
-}
-
-
 // 查看投递详情
 const goToApplicationDetail = (id) => {
 
-    router.push(`/application/info?id=${id}`)
+    router.push(`/layout/application/info?id=${id}`)
 
 }
 

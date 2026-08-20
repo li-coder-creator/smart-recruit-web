@@ -134,7 +134,7 @@ const handleUpdatePassword = async () => {
             ElMessage.success('密码修改成功')
 
             // 修改成功后返回首页
-            router.push('/layout')
+            router.push('/layout/home')
 
         } else {
 
@@ -157,7 +157,7 @@ const handleUpdatePassword = async () => {
 // 返回首页
 const goBack = () => {
 
-    router.push('/layout')
+    router.push('/layout/home')
 
 }
 

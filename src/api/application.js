@@ -4,6 +4,10 @@ import request from '@/utils/request'
 export const applyJob = (data) => {
     return request.post('/application', data)
 }
+// 求职者查看我的投递
+export const getJobseekerApplication = () => {
+    return request.get('/application/mine')
+}
 
 // 企业查看收到的投递
 export const getApplicationList = () => {

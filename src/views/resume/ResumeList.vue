@@ -53,7 +53,7 @@ import {
     deleteResume
 } from '@/api/resume'
 
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -74,9 +74,11 @@ const loadResumeList = async () => {
 
     } catch (e) {
 
-        console.error(e)
+    console.error(e)
 
-    }
+    ElMessage.error('获取简历列表失败')
+
+}
 
 }
 //删除简历
@@ -84,31 +86,51 @@ const handleDelete = async (id) => {
 
     try {
 
+        await ElMessageBox.confirm(
+            '确定要删除这份简历吗？',
+            '提示',
+            {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }
+        )
+
         const res = await deleteResume(id)
 
         if (res.data.code === 200) {
 
-            ElMessage.success("删除成功")
+            ElMessage.success('删除成功')
 
             await loadResumeList()
 
+            return
         }
+
+        ElMessage.error(res.data.message || '删除失败')
 
     } catch (e) {
 
-        console.error(e)
+        // 用户点击取消，不提示错误
+        if (e !== 'cancel') {
+
+            console.error(e)
+
+            ElMessage.error('删除失败')
+
+        }
 
     }
 
 }
 const goToAddResume = () => {
 
-    router.push('/resume/edit')
+    router.push('/layout/resume/edit')
 
 }
 const goToEditResume = (id) => {
 
-    router.push(`/resume/edit?id=${id}`)
+    router.push(`/layout/resume/edit?id=${id}`)
 
 }
 // 页面加载完成后执行

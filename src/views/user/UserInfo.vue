@@ -147,14 +147,14 @@ const loadUserInfo = async () => {
 // 修改资料
 const goToUpdateInfo = () => {
 
-    router.push('/user/update')
+    router.push('/layout/user/update')
 
 }
 
 // 修改密码
 const goToUpdatePassword = () => {
 
-    router.push('/user/password')
+    router.push('/layout/user/password')
 
 }
 

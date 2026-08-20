@@ -4,40 +4,42 @@
 
     <h2>投递详情</h2>
 
-    <!-- 投递ID -->
     <p>
-      投递ID：{{ application.id }}
+    投递编号：{{ application.id }}
     </p>
 
-    <!-- 求职者ID -->
-    <p>
-      求职者ID：{{ application.userId }}
+    <p v-if="userStore.role === 'COMPANY'">
+    求职者：{{ application.username }}
     </p>
 
-    <!-- 岗位ID -->
     <p>
-      岗位ID：{{ application.jobId }}
+    岗位：{{ application.jobTitle }}
     </p>
 
-    <!-- 简历ID -->
     <p>
-      简历ID：{{ application.resumeId }}
+    公司：{{ application.companyName }}
     </p>
 
-    <!-- 当前投递状态 -->
     <p>
-      当前状态：
-      {{ getStatusText(application.status) }}
+    简历：{{ application.resumeTitle }}
     </p>
 
-    <!-- 修改投递状态 -->
-    <el-form-item label="修改状态">
+    <p>
+    当前状态：{{ application.statusText }}
+    </p>
 
-      <el-select
-          v-model="selectedStatus"
-          placeholder="请选择投递状态"
-          style="width: 200px"
-      >
+
+   <!-- 企业才能修改投递状态 -->
+    <el-form-item
+        v-if="userStore.role === 'COMPANY'"
+        label="修改状态"
+    >
+
+    <el-select
+        v-model="selectedStatus"
+        placeholder="请选择投递状态"
+        style="width: 200px"
+    >
 
         <el-option
             label="待处理"
@@ -64,17 +66,17 @@
             :value="4"
         />
 
-      </el-select>
+    </el-select>
 
-      <el-button
-          type="primary"
-          @click="handleUpdateStatus"
-          style="margin-left: 10px"
-      >
-        更新状态
-      </el-button>
+  <el-button
+      type="primary"
+      @click="handleUpdateStatus"
+      style="margin-left: 10px"
+  >
+    更新状态
+  </el-button>
 
-    </el-form-item>
+</el-form-item>
 
     <!-- 投递时间 -->
     <p>
@@ -98,14 +100,17 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue'
+import { ref,  onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/user'
 
 import {
     getApplicationDetail,
     updateApplicationStatus
 } from '@/api/application'
+
+const userStore = useUserStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -151,6 +156,9 @@ const loadApplicationDetail = async () => {
 // 修改投递状态
 const handleUpdateStatus = async () => {
 
+    if (userStore.role !== 'COMPANY') {
+    return
+}
     if (selectedStatus.value === null) {
 
         ElMessage.warning('请选择投递状态')
@@ -190,31 +198,10 @@ const handleUpdateStatus = async () => {
 
 }
 
-// 状态文字转换
-const getStatusText = (status) => {
-
-    const statusMap = {
-
-        0: '待处理',
-
-        1: '已查看',
-
-        2: '面试',
-
-        3: '已录用',
-
-        4: '已拒绝'
-
-    }
-
-    return statusMap[status] || '未知状态'
-
-}
-
 // 返回投递列表
 const goBack = () => {
 
-    router.push('/application')
+    router.push('/layout/application')
 
 }
 

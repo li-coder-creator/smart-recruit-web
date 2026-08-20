@@ -86,11 +86,15 @@ const handleSave = async () => {
 
         if (res.data.code === 200) {
 
-            ElMessage.success('保存成功')
+        ElMessage.success('保存成功')
 
-            router.push('/resume')
+        router.push('/layout/resume')
 
-        }
+        return
+
+}
+
+ElMessage.error(res.data.message || '保存失败')
 
     } catch (e) {
 
@@ -134,7 +138,7 @@ const loadResumeDetail = async () => {
 }
 //返回按钮
 const goBack = () => {
-    router.push('/resume')
+    router.push('/layout/resume')
 }
 onMounted(() => {
 

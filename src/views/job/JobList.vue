@@ -6,6 +6,7 @@
 
     <!-- 发布岗位 -->
     <el-button
+        v-if="isCompany"
         type="primary"
         @click="goToAddJob"
     >
@@ -34,8 +35,9 @@
 
         <p>学历：{{ job.education }}</p>
 
-        <!-- 编辑 -->
+       <!-- 编辑 -->
         <el-button
+            v-if="isCompany"
             type="primary"
             @click="goToEditJob(job.id)"
         >
@@ -44,6 +46,7 @@
 
         <!-- 删除 -->
         <el-button
+            v-if="isCompany"
             type="danger"
             @click="handleDelete(job.id)"
         >
@@ -74,6 +77,14 @@ import {
 
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+
+const isCompany = computed(() => {
+    return userStore.role === 'COMPANY'
+})
 
 const router = useRouter()
 
@@ -126,20 +137,20 @@ const handleDelete = async (id) => {
 // 跳转到新增岗位
 const goToAddJob = () => {
 
-    router.push('/job/add')
+    router.push('/layout/job/add')
 
 }
 
 // 跳转到编辑岗位
 const goToEditJob = (id) => {
 
-    router.push(`/job/edit?id=${id}`)
+    router.push(`/layout/job/edit?id=${id}`)
 
 }
 // 跳转到岗位详情
 const goToJobInfo = (id) => {
 
-    router.push(`/job/info?id=${id}`)
+    router.push(`/layout/job/info?id=${id}`)
 
 }
 

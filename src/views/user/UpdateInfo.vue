@@ -162,7 +162,7 @@ const handleUpdate = async () => {
 
             ElMessage.success('修改成功')
 
-            router.push('/user/info')
+            router.push('/layout/user/info')
 
         } else {
 
@@ -185,7 +185,7 @@ const handleUpdate = async () => {
 // 返回
 const goBack = () => {
 
-    router.push('/user/info')
+    router.push('/layout/user/info')
 
 }
 

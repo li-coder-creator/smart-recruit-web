@@ -27,10 +27,11 @@
     <p>学历要求：{{ job.education }}</p>
 
     <el-button
+        v-if="isJobSeeker"
         type="primary"
         @click="goToApply"
     >
-      立即投递
+        立即投递
     </el-button>
 
     <el-button
@@ -83,13 +84,20 @@
 </template>
 <script setup>
 
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
 import { getJobDetail } from '@/api/job'
 import { getResumeList } from '@/api/resume'
 import { applyJob } from '@/api/application'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+
+const isJobSeeker = computed(() => {
+    return userStore.role === 'JOB_SEEKER'
+})
 
 const route = useRoute()
 const router = useRouter()
@@ -192,7 +200,7 @@ const handleApply = async () => {
 // 返回岗位列表
 const goBack = () => {
 
-    router.push('/job')
+    router.push('/layout/job')
 
 }
 

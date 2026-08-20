@@ -84,16 +84,19 @@
 
           <template v-if="userStore.role === 'COMPANY'">
 
-            <el-menu-item index="/layout/job">
-              岗位管理
-            </el-menu-item>
+          <el-menu-item index="/layout/company/info">
+            企业信息
+          </el-menu-item>
 
-            <el-menu-item index="/layout/application">
-              收到的简历
-            </el-menu-item>
+          <el-menu-item index="/layout/job">
+            岗位管理
+          </el-menu-item>
+
+          <el-menu-item index="/layout/application">
+            收到的简历
+          </el-menu-item>
 
           </template>
-
 
           <!-- ========================= -->
           <!-- 管理员 -->

@@ -15,8 +15,11 @@ import ApplicationInfo from '@/views/application/ApplicationInfo.vue'
 import Register from '@/views/user/Register.vue'
 import UserInfo from '@/views/user/UserInfo.vue'
 import UpdateInfo from '@/views/user/UpdateInfo.vue'
+import CompanyInfo from '@/views/company/CompanyInfo.vue'
+import CompanyEdit from '@/views/company/CompanyEdit.vue'
 import UserPassword from '@/views/user/UserPassword.vue'
-
+import AdminUserList from '@/views/admin/AdminUserList.vue'
+import AdminCompanyList from '@/views/admin/AdminCompanyList.vue'
 
 
 const router = createRouter({
@@ -218,7 +221,59 @@ const router = createRouter({
             roles: ['JOB_SEEKER','COMPANY','ADMIN']
           }
 
-        }
+        },
+        // =========================
+        // 企业信息
+        // =========================
+
+        {
+          path: 'company/info',
+
+          component: CompanyInfo,
+
+          meta: {
+            roles: ['COMPANY']
+          }
+
+        },
+        {
+          path: 'company/edit',
+
+          component: CompanyEdit,
+
+          meta: {
+            roles: ['COMPANY']
+          }
+
+        },
+        // =========================
+        // 管理员：用户管理
+        // =========================
+
+        {
+          path: 'admin/user',
+
+          component: AdminUserList,
+
+          meta: {
+            roles: ['ADMIN']
+          }
+
+        },
+        // =========================
+        // 管理员：企业审核
+        // =========================
+
+        {
+          path: 'admin/company',
+
+          component: AdminCompanyList,
+
+          meta: {
+            roles: ['ADMIN']
+          }
+
+        },
 
       ]
 
