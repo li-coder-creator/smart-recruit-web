@@ -18,6 +18,7 @@ import UpdateInfo from '@/views/user/UpdateInfo.vue'
 import UserPassword from '@/views/user/UserPassword.vue'
 
 
+
 const router = createRouter({
 
   history: createWebHistory(),
@@ -73,7 +74,11 @@ const router = createRouter({
           path: 'home',
 
           component: () =>
-            import('@/views/layout/Home.vue')
+            import('@/views/layout/Home.vue'),
+
+          meta: {
+            roles: ['JOB_SEEKER', 'COMPANY', 'ADMIN']
+          }
 
         },
 
@@ -85,14 +90,24 @@ const router = createRouter({
         {
           path: 'resume',
 
-          component: ResumeList
+          component: ResumeList,
+
+          meta: {
+            roles: ['JOB_SEEKER']
+          }
+
 
         },
 
         {
           path: 'resume/edit',
 
-          component: ResumeEdit
+          component: ResumeEdit,
+
+          meta: {
+            roles: ['JOB_SEEKER']
+          }
+
 
         },
 
@@ -104,28 +119,43 @@ const router = createRouter({
         {
           path: 'job',
 
-          component: JobList
+          component: JobList,
+
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY']
+          }
 
         },
 
         {
           path: 'job/add',
 
-          component: JobEdit
+          component: JobEdit,
+
+          meta: {
+            roles: ['COMPANY']
+          }
 
         },
 
         {
           path: 'job/edit',
 
-          component: JobEdit
+          component: JobEdit,
 
+          meta: {
+            roles: ['COMPANY']
+          }
         },
 
         {
           path: 'job/info',
 
-          component: JobInfo
+          component: JobInfo,
+         
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY']
+          }
 
         },
 
@@ -138,14 +168,20 @@ const router = createRouter({
           path: 'application',
 
           component: () =>
-            import('@/views/application/ApplicationList.vue')
+            import('@/views/application/ApplicationList.vue'),
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY']
+          }
 
         },
 
         {
           path: 'application/info',
 
-          component: ApplicationInfo
+          component: ApplicationInfo,
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY']
+          }
 
         },
 
@@ -157,21 +193,30 @@ const router = createRouter({
         {
           path: 'user/info',
 
-          component: UserInfo
+          component: UserInfo,
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY','ADMIN']
+          }
 
         },
 
         {
           path: 'user/password',
 
-          component: UserPassword
+          component: UserPassword,
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY','ADMIN']
+          }
 
         },
 
         {
           path: 'user/update',
 
-          component: UpdateInfo
+          component: UpdateInfo,
+          meta: {
+            roles: ['JOB_SEEKER','COMPANY','ADMIN']
+          }
 
         }
 
@@ -265,6 +310,20 @@ router.beforeEach(async (to) => {
     if (!userStore.userInfo) {
 
       await userStore.initUser()
+
+    }
+
+    // =========================
+    // 角色权限检查
+    // =========================
+    const roles = to.meta?.roles
+
+    if (
+      roles &&
+      !roles.includes(userStore.role)
+    ) {
+
+      return '/layout/home'
 
     }
 
