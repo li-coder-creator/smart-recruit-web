@@ -50,9 +50,10 @@
 import { reactive } from "vue";
 import { ElMessage } from "element-plus";
 import { login } from "@/api/user";
+import { useUserStore } from '@/stores/user'
 import { useRouter } from "vue-router"
 const router = useRouter()
-
+const userStore = useUserStore()
 const loginForm = reactive({
   username: "",
   password: ""
@@ -69,12 +70,14 @@ const handleLogin = async () => {
       return
     }
 
+    
     // 登录成功
-    localStorage.setItem("token", res.data.data)
+    userStore.setToken(res.data.data)
+    // 获取当前用户信息
+    await userStore.initUser()
     ElMessage.success("登录成功")
-    //跳转
     router.push("/layout")
-
+    
   } catch (e) {
 
     console.error(e)

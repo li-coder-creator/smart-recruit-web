@@ -37,33 +37,31 @@
       <el-aside width="220px">
 
         <el-menu
-            default-active="1"
+           router
+           :default-active="activeMenu"
         >
 
-          <el-menu-item index="1">
+          <el-menu-item index="/layout/home">
 
             首页
 
           </el-menu-item>
 
           <el-menu-item
-              index="2"
-              @click="goToResume"
+              index="/layout/resume"
           >
               简历管理
           </el-menu-item>
 
           <el-menu-item 
-              index="3"
-              @click="goToJob"
+              index="/layout/job"
           >
             岗位管理
 
           </el-menu-item>
 
           <el-menu-item 
-              index="4"
-              @click="goToApplication"
+              index="/layout/application"
           >
 
             收到的简历
@@ -74,15 +72,11 @@
 
       </el-aside>
 
-      <el-main>
+     <el-main>
 
-        <h2>
+        <router-view />
 
-          欢迎来到 Smart Recruit
-
-        </h2>
-
-      </el-main>
+     </el-main>
 
     </el-container>
 
@@ -92,15 +86,22 @@
 
 <script setup>
 
-import { reactive,onMounted } from "vue"
+import { reactive,onMounted ,computed} from "vue"
 
 import { getUserInfo } from "@/api/user"
 
 import { ElMessage } from "element-plus"
 
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from 'vue-router'
 
-const router=useRouter()
+const route = useRoute()
+const router = useRouter()
+
+const activeMenu = computed(() => {
+
+  return route.path
+
+})
 
 const user=reactive({
 
@@ -138,28 +139,10 @@ onMounted(()=>{
 
 })
 
-const goToResume = () => {
-
-    router.push('/resume')
-
-}
-const goToJob = () => {
-
-    router.push('/job')
-
-}
-const goToApplication = () => {
-
-    router.push('/application')
-
-}
 const goToUserInfo = () => {
-    router.push('/user/info')
+    router.push('/layout/user/info')
 }
 
-const goToPassword = () => {
-    router.push('/user/password')
-}
 </script>
 
 <style scoped>
