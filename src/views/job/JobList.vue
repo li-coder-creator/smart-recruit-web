@@ -2,7 +2,7 @@
 
   <div class="job-container">
 
-    <h2>岗位管理</h2>
+    <h2>{{ pageTitle }}</h2>
 
     <!-- 发布岗位 -->
     <el-button
@@ -84,6 +84,10 @@ const userStore = useUserStore()
 
 const isCompany = computed(() => {
     return userStore.role === 'COMPANY'
+})
+
+const pageTitle = computed(() => {
+    return userStore.role === 'JOB_SEEKER' ? '岗位浏览' : '岗位管理'
 })
 
 const router = useRouter()

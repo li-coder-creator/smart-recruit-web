@@ -295,22 +295,44 @@ const goToRegister = () => {
 
   height: 100vh;
 
+  min-height: 680px;
+
   display: flex;
 
   justify-content: center;
 
   align-items: center;
 
-  background: #eef2f6;
+  padding: 28px;
+
+  background:
+    linear-gradient(135deg, rgba(18, 184, 134, 0.1) 0%, rgba(18, 184, 134, 0) 42%),
+    linear-gradient(315deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 40%),
+    linear-gradient(135deg, #f6fbf9 0%, #eef6fb 100%);
 
 }
 
 
 .login-card {
 
-  width: 460px;
+  width: min(100%, 480px);
 
-  border-radius: 12px;
+  overflow: hidden;
+
+  border: 1px solid rgba(18, 184, 134, 0.16);
+
+  border-radius: 8px;
+
+  box-shadow: 0 24px 80px rgba(15, 35, 52, 0.14);
+
+}
+
+
+.login-card :deep(.el-card__header) {
+
+  padding: 32px 34px 20px;
+
+  border-bottom: 0;
 
 }
 
@@ -324,33 +346,39 @@ const goToRegister = () => {
 
 .login-header h2 {
 
-  margin: 5px 0;
+  margin: 0;
 
-  font-size: 26px;
+  color: #17233d;
+
+  font-size: 32px;
+
+  font-weight: 850;
 
 }
 
 
 .login-header p {
 
-  margin: 8px 0 0;
+  margin: 10px 0 0;
 
-  color: #909399;
+  color: #64748b;
 
-  font-size: 14px;
+  font-size: 15px;
 
 }
 
 
 .role-title {
 
-  text-align: center;
+  text-align: left;
 
-  margin: 10px 0 15px;
+  margin: 2px 0 14px;
 
-  color: #606266;
+  color: #334155;
 
-  font-size: 14px;
+  font-size: 15px;
+
+  font-weight: 700;
 
 }
 
@@ -359,9 +387,9 @@ const goToRegister = () => {
 
   display: flex;
 
-  gap: 10px;
+  gap: 12px;
 
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 
 }
 
@@ -370,11 +398,13 @@ const goToRegister = () => {
 
   flex: 1;
 
-  padding: 15px 8px;
+  min-width: 0;
+
+  padding: 16px 10px;
 
   text-align: center;
 
-  border: 1px solid #dcdfe6;
+  border: 1px solid #e6edf3;
 
   border-radius: 8px;
 
@@ -382,32 +412,36 @@ const goToRegister = () => {
 
   transition: all 0.2s;
 
-  background: #fff;
+  background: #ffffff;
 
 }
 
 
 .role-item:hover {
 
-  border-color: #409eff;
+  border-color: #12b886;
+
+  box-shadow: 0 10px 28px rgba(18, 184, 134, 0.11);
 
 }
 
 
 .role-item.active {
 
-  border-color: #409eff;
+  border-color: #12b886;
 
-  background: #ecf5ff;
+  background: #e8fbf5;
+
+  box-shadow: inset 0 0 0 1px rgba(18, 184, 134, 0.18);
 
 }
 
 
 .role-icon {
 
-  font-size: 28px;
+  font-size: 26px;
 
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 
 }
 
@@ -416,9 +450,11 @@ const goToRegister = () => {
 
   font-size: 15px;
 
-  font-weight: 600;
+  font-weight: 750;
 
   margin-bottom: 5px;
+
+  color: #17233d;
 
 }
 
@@ -427,14 +463,21 @@ const goToRegister = () => {
 
   font-size: 12px;
 
-  color: #909399;
+  color: #64748b;
 
 }
 
 
 .login-form {
 
-  margin-top: 5px;
+  margin-top: 4px;
+
+}
+
+
+.login-form :deep(.el-input__wrapper) {
+
+  min-height: 44px;
 
 }
 
@@ -447,9 +490,36 @@ const goToRegister = () => {
 
   align-items: center;
 
-  color: #909399;
+  color: #64748b;
 
   font-size: 14px;
+
+}
+
+
+@media (max-width: 540px) {
+
+  .login-container {
+
+    min-height: 100vh;
+
+    padding: 18px;
+
+  }
+
+
+  .login-card :deep(.el-card__body) {
+
+    padding: 20px;
+
+  }
+
+
+  .role-select {
+
+    flex-direction: column;
+
+  }
 
 }
 

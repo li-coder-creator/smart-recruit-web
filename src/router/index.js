@@ -125,7 +125,7 @@ const router = createRouter({
           component: JobList,
 
           meta: {
-            roles: ['JOB_SEEKER','COMPANY']
+            roles: ['JOB_SEEKER','COMPANY','ADMIN']
           }
 
         },
@@ -157,7 +157,7 @@ const router = createRouter({
           component: JobInfo,
          
           meta: {
-            roles: ['JOB_SEEKER','COMPANY']
+            roles: ['JOB_SEEKER','COMPANY','ADMIN']
           }
 
         },

@@ -148,7 +148,7 @@ const goToApply = async () => {
 
         if (res.data.code === 200) {
 
-            resumeList.value = res.data.data
+            resumeList.value = res.data.data.items ?? []
 
             applyDialogVisible.value = true
            

@@ -1,6 +1,9 @@
 import axios from "axios"
 import { ElMessage } from "element-plus"
 import router from "@/router"
+
+const API_SUCCESS_CODE = 200
+
 // 创建axios实例
 const request = axios.create({
     baseURL: "/api",
@@ -26,7 +29,19 @@ request.interceptors.request.use(config => {
  */
 request.interceptors.response.use(
 
-    response => response,
+    response => {
+        const result = response.data
+
+        if (
+            result &&
+            typeof result.code === "number" &&
+            result.code !== API_SUCCESS_CODE
+        ) {
+            return Promise.reject(new Error(result.message || "请求失败"))
+        }
+
+        return response
+    },
 
     error => {
 
@@ -43,5 +58,6 @@ request.interceptors.response.use(
     }
 
 )
+
 
 export default request

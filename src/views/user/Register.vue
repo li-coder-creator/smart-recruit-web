@@ -354,16 +354,36 @@ const goToLogin = () => {
 
   align-items: center;
 
-  background: #eef2f6;
+  padding: 28px;
+
+  background:
+    linear-gradient(135deg, rgba(18, 184, 134, 0.1) 0%, rgba(18, 184, 134, 0) 42%),
+    linear-gradient(315deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 40%),
+    linear-gradient(135deg, #f6fbf9 0%, #eef6fb 100%);
 
 }
 
 
 .register-card {
 
-  width: 480px;
+  width: min(100%, 500px);
 
-  border-radius: 12px;
+  overflow: hidden;
+
+  border: 1px solid rgba(18, 184, 134, 0.16);
+
+  border-radius: 8px;
+
+  box-shadow: 0 24px 80px rgba(15, 35, 52, 0.14);
+
+}
+
+
+.register-card :deep(.el-card__header) {
+
+  padding: 32px 34px 20px;
+
+  border-bottom: 0;
 
 }
 
@@ -377,33 +397,39 @@ const goToLogin = () => {
 
 .register-header h2 {
 
-  margin: 5px 0;
+  margin: 0;
 
-  font-size: 26px;
+  color: #17233d;
+
+  font-size: 32px;
+
+  font-weight: 850;
 
 }
 
 
 .register-header p {
 
-  margin: 8px 0 0;
+  margin: 10px 0 0;
 
-  color: #909399;
+  color: #64748b;
 
-  font-size: 14px;
+  font-size: 15px;
 
 }
 
 
 .role-title {
 
-  text-align: center;
+  text-align: left;
 
-  margin: 10px 0 15px;
+  margin: 2px 0 14px;
 
-  color: #606266;
+  color: #334155;
 
-  font-size: 14px;
+  font-size: 15px;
+
+  font-weight: 700;
 
 }
 
@@ -414,7 +440,7 @@ const goToLogin = () => {
 
   gap: 12px;
 
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 
 }
 
@@ -423,11 +449,11 @@ const goToLogin = () => {
 
   flex: 1;
 
-  padding: 18px 10px;
+  padding: 16px 10px;
 
   text-align: center;
 
-  border: 1px solid #dcdfe6;
+  border: 1px solid #e6edf3;
 
   border-radius: 8px;
 
@@ -440,23 +466,27 @@ const goToLogin = () => {
 
 .role-item:hover {
 
-  border-color: #409eff;
+  border-color: #12b886;
+
+  box-shadow: 0 10px 28px rgba(18, 184, 134, 0.11);
 
 }
 
 
 .role-item.active {
 
-  border-color: #409eff;
+  border-color: #12b886;
 
-  background: #ecf5ff;
+  background: #e8fbf5;
+
+  box-shadow: inset 0 0 0 1px rgba(18, 184, 134, 0.18);
 
 }
 
 
 .role-icon {
 
-  font-size: 30px;
+  font-size: 26px;
 
   margin-bottom: 8px;
 
@@ -465,9 +495,11 @@ const goToLogin = () => {
 
 .role-name {
 
-  font-size: 16px;
+  color: #17233d;
 
-  font-weight: 600;
+  font-size: 15px;
+
+  font-weight: 750;
 
   margin-bottom: 5px;
 
@@ -478,7 +510,7 @@ const goToLogin = () => {
 
   font-size: 12px;
 
-  color: #909399;
+  color: #64748b;
 
 }
 
@@ -486,6 +518,13 @@ const goToLogin = () => {
 .register-form {
 
   margin-top: 5px;
+
+}
+
+
+.register-form :deep(.el-input__wrapper) {
+
+  min-height: 42px;
 
 }
 
@@ -498,9 +537,34 @@ const goToLogin = () => {
 
   align-items: center;
 
-  color: #909399;
+  color: #64748b;
 
   font-size: 14px;
+
+}
+
+
+@media (max-width: 540px) {
+
+  .register-container {
+
+    padding: 18px;
+
+  }
+
+
+  .register-card :deep(.el-card__body) {
+
+    padding: 20px;
+
+  }
+
+
+  .role-select {
+
+    flex-direction: column;
+
+  }
 
 }
 
