@@ -28,6 +28,7 @@
             {{ job.city || '城市待填写' }} · {{ job.experience || '经验待填写' }} ·
             {{ job.education || '学历待填写' }} · {{ job.employment || '用工类型待填写' }}
           </p>
+          <el-button v-if="isJobSeeker && job.companyId" link @click="router.push('/layout/company/' + job.companyId + '/profile')">查看招聘企业主页</el-button>
           <div class="job-actions" v-if="isCompany">
             <el-button
               type="primary"

@@ -41,6 +41,7 @@
 </template>
 
 <script setup>
+defineOptions({ name: 'AppLayout' })
 import { computed } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
@@ -106,6 +107,10 @@ const roleMenus = {
     {
       label: '企业审核',
       path: '/layout/admin/company',
+    },
+    {
+      label: '工商与资质审核',
+      path: '/layout/admin/company/reviews',
     },
     {
       label: '岗位管理',

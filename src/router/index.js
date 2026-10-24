@@ -246,6 +246,16 @@ const router = createRouter({
           }
 
         },
+        {
+          path: 'company/:id/profile',
+          component: () => import('@/views/company/CompanyPublic.vue'),
+          meta: { roles: ['JOB_SEEKER'] }
+        },
+        {
+          path: 'admin/company/reviews',
+          component: () => import('@/views/admin/AdminCompanyReviews.vue'),
+          meta: { roles: ['ADMIN'] }
+        },
         // =========================
         // 管理员：用户管理
         // =========================

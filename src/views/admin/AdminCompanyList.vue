@@ -9,6 +9,7 @@
     <div class="page-header">
 
       <h2>企业审核</h2>
+      <el-button type="primary" @click="$router.push('/layout/admin/company/reviews')">工商与资质审核</el-button>
 
     </div>
 

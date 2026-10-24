@@ -37,7 +37,10 @@ request.interceptors.response.use(
             typeof result.code === "number" &&
             result.code !== API_SUCCESS_CODE
         ) {
-            return Promise.reject(new Error(result.message || "请求失败"))
+            const error = new Error(result.message || "请求失败")
+            error.response = response
+            error.businessCode = result.code
+            return Promise.reject(error)
         }
 
         return response
