@@ -2,7 +2,7 @@ import axios from "axios"
 import { ElMessage } from "element-plus"
 import router from "@/router"
 
-const API_SUCCESS_CODE = 200
+export const API_SUCCESS_CODE = 200
 
 // 创建axios实例
 const request = axios.create({
